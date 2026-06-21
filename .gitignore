@@ -1,0 +1,15 @@
+__pycache__/
+
+website/*
+
+papelera/*
+!papelera/.gitkeep
+
+origen/*
+!origen/.gitkeep
+
+*.zip
+*.rar
+*.exe
+*.tmp
+*.log

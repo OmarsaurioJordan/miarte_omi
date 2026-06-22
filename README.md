@@ -54,7 +54,7 @@ No se sincronizan con el repositorio
 - para cargar imágenes "files" pulsar un botón, que abra un selector de archivos múltiples, con formatos (png, jpg, jpeg, gif, bmp, webm), las imágnees cargadas aparecerán en la interfaz pero aún no se moverán o copiarán archivos, por defecto abre la carpeta origen/
 - poder eliminar imágenes cargadas en la interfaz, solo desvincula el archivo de la UI, no lo elimina como tal
 - editar los metadatos que a futuro irán a data.json para una serie de dibujos nueva
-- habrá un selector con las carpetas "folder" que existen dentro de miarte/
+- habrá un selector con las carpetas que existen dentro de miarte/
 - los tags son textos separados por comas, a la hora de guardar, se convierten en array de strings
 - el atributo "style" es un desplegable con las opciónes de style, ver apartado "Metadatos JSON"
 - "nsfw" por defecto está en false
@@ -66,7 +66,7 @@ No se sincronizan con el repositorio
 - para cargar imágenes "files" pulsar un botón, que abra un selector de archivos múltiples, con formatos (png, jpg, jpeg, gif, bmp, webm), las imágnees cargadas aparecerán en la interfaz pero aún no se moverán o copiarán archivos, por defecto abre la carpeta origen/
 - poder eliminar imágenes cargadas en la interfaz, solo desvincula el archivo de la UI, no lo elimina como tal
 - editar los metadatos que a futuro irán a data.json para editar la serie
-- habrá un selector con las carpetas "folder" que existen dentro de miarte/
+- habrá un selector con las carpetas que existen dentro de miarte/
 - los tags son textos separados por comas, a la hora de guardar, se convierten en array de strings
 - el atributo "style" es un desplegable con las opciónes de style, ver apartado "Metadatos JSON"
 - botón de guardar, compara los metadatos nuevos con los de data.json para el ID obtenido, según eso, elimina la metadata y mueve dibujos a papelera/ cuando no hay dibujos en la nueva metadata, o mueve todo a otra carpeta si la carpeta cambió, o agrega o elimina dibujos, siempre respetando las reglas de eliminación en papelera/ y movimientos sin duplicar archivos, si salió bien retorna a main.py
@@ -87,6 +87,7 @@ cada carpeta en miarte/ tiene un data.json, cada carpeta es un grupo temático, 
 
 y para cada serie de dibujos hay una estructura como la siguiente, tener en cuenta que una serie puede constar de solo un dibujo o de varios que actúan como si fueran uno, por eso files y no file
 
+- id - str (identificador único de la serie, válido en todo miarte/)
 - title - str (título de la serie de dibujos)
 - description - str (descripción de la serie de dibujos)
 - year - int (el año en que fueron hechos los dibujos)
@@ -94,7 +95,6 @@ y para cada serie de dibujos hay una estructura como la siguiente, tener en cuen
 - nsfw - bool (true si los dibujos tienen contenido sexual)
 - files - array-str (nombres de archivos de los dibujos)
 - style - str (qué tipo de dibujo es, esto es como otro tag)
-- folder - str (nombre de la carpeta donde están los archivos)
 
 para el caso de style, los posibles strings son: sketch, vectorial, ilustración, sprite, asset, tradicional, pixelart, lowdigital, modelo3D, manualidad, fotografía, animación, procedural, textura, editor, mixto, otro
 

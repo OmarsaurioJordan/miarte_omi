@@ -268,11 +268,17 @@ class ArteNuevoApp:
 
         save_data_file(folder_name, data)
         messagebox.showinfo("Guardado", f"Serie guardada correctamente en {folder_name}.")
-        self.close_window()
+        self.clear_form()
 
-    def close_window(self):
-        if self.root and self.root.winfo_exists():
-            self.root.destroy()
+    def clear_form(self):
+        self.selected_images = []
+        self.images_listbox.delete(0, tk.END)
+        self.title_var.set("")
+        self.year_var.set("")
+        self.tags_var.set("")
+        self.style_var.set(STYLE_OPTIONS[0])
+        self.nsfw_var.set(False)
+        self.description_text.delete("1.0", tk.END)
 
 def run():
     app = ArteNuevoApp()

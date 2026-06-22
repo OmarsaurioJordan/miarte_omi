@@ -1,57 +1,6 @@
 {
   "title": "Sketchs",
   "description": "Colección de sketches y pruebas gráficas.",
-  "file": "WhatsApp Image 2025-07-27 at 11.45.37 AM.jpeg",
-  "series": [
-    {
-      "id": "fotitos_77db58a8374c4828a8411adf11791a96",
-      "title": "fotitos lokassss",
-      "description": "solo una foto mía y una de UV bien cool",
-      "year": 2021,
-      "tags": [
-        "foto",
-        "omi",
-        "univalle",
-        "locura"
-      ],
-      "nsfw": false,
-      "files": [
-        "WhatsApp Image 2025-07-27 at 11.45.37 AM.jpeg"
-      ],
-      "style": "fotografía"
-    },
-    {
-      "id": "vaquera_9dc1332b993546399f5f57064a250d50",
-      "title": "vaquera",
-      "description": "una vaquera sucia",
-      "year": 2019,
-      "tags": [
-        "girl",
-        "salta"
-      ],
-      "nsfw": true,
-      "files": [
-        "munnequinna.gif"
-      ],
-      "style": "pixelart"
-    },
-    {
-      "id": "cosasssss_ad20a844391b439d8d11a5b895ddff14",
-      "title": "cosasssss",
-      "description": "algooooo",
-      "year": 2020,
-      "tags": [
-        "cosa",
-        "coso"
-      ],
-      "nsfw": false,
-      "files": [
-        "pid.gif",
-        "vestigium.gif",
-        "reconectador.gif",
-        "deee.gif"
-      ],
-      "style": "asset"
-    }
-  ]
+  "file": "",
+  "series": []
 }

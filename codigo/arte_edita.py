@@ -322,6 +322,14 @@ class ArteEditaApp:
             else:
                 self.images_listbox.insert(tk.END, f"{filename} (no existe)")
 
+    def select_current_series_in_listbox(self, series_id):
+        for index, item in enumerate(self.series_items):
+            if item.get("id") == series_id:
+                self.series_listbox.selection_clear(0, tk.END)
+                self.series_listbox.selection_set(index)
+                self.series_listbox.see(index)
+                break
+
     def save(self):
         if not self.current_series:
             messagebox.showwarning("Guardar", "Seleccione una serie para editar.")
@@ -391,6 +399,24 @@ class ArteEditaApp:
             "style": style,
         }
 
+        if not final_names:
+            source_data["series"] = [item for item in source_data.get("series", []) if item.get("id") != old_id]
+            save_data_file(source_folder, source_data)
+            if source_folder != target_folder:
+                target_data["series"] = [item for item in target_data.get("series", []) if item.get("id") != old_id]
+                save_data_file(target_folder, target_data)
+
+            messagebox.showinfo("Guardado", "No había archivos en la serie; la metadata fue eliminada y los dibujos eliminados a la papelera.")
+            self.selected_images = []
+            self.images_listbox.delete(0, tk.END)
+            self.current_series = None
+            self.original_series = None
+            if source_folder == self.current_folder:
+                self.current_data = source_data
+                self.series_items = self.current_data.get("series", [])
+                self.populate_series_listbox()
+            return
+
         if source_folder != target_folder:
             source_data["series"] = [item for item in source_data.get("series", []) if item.get("id") != old_id]
             save_data_file(source_folder, source_data)
@@ -400,6 +426,8 @@ class ArteEditaApp:
             if not target_data.get("file") and final_names:
                 target_data["file"] = final_names[0]
             save_data_file(target_folder, target_data)
+            self.current_folder = target_folder
+            self.current_data = target_data
         else:
             series_list = source_data.get("series", [])
             for index, item in enumerate(series_list):
@@ -410,12 +438,23 @@ class ArteEditaApp:
             if not source_data.get("file") and final_names:
                 source_data["file"] = final_names[0]
             save_data_file(source_folder, source_data)
+            self.current_data = source_data
 
-        if not final_names:
-            messagebox.showinfo("Guardado", "No había archivos en la serie; la metadata fue eliminada y los dibujos eliminados a la papelera.")
-        else:
-            messagebox.showinfo("Guardado", "La serie se actualizó correctamente.")
-        self.close_window()
+        messagebox.showinfo("Guardado", "La serie se actualizó correctamente.")
+        self.current_series = new_series
+        self.original_series = copy.deepcopy(new_series)
+        self.selected_images = [os.path.join(MIARTE_DIR, self.current_folder, file_name) for file_name in final_names]
+        self.refresh_images_listbox()
+        self.current_folder_label.config(text=f"Carpeta: {self.current_folder}")
+        self.folder_select.set(self.current_folder)
+        self.folder_combo.config(values=list_folders())
+        if self.current_folder not in self.folder_combo["values"]:
+            self.folder_combo["values"] = list(self.folder_combo["values"]) + [self.current_folder]
+        self.folder_combo.set(self.current_folder)
+        self.current_data = load_data_file(self.current_folder)
+        self.series_items = self.current_data.get("series", [])
+        self.populate_series_listbox()
+        self.select_current_series_in_listbox(old_id)
 
     def close_window(self):
         if self.root and self.root.winfo_exists():

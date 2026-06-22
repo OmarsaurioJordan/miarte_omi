@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import tkinter as tk
@@ -6,7 +7,21 @@ from tkinter import ttk, messagebox
 # obtenemos el directorio del codigo y del proyecto, luego agrega el directorio al path de importaciones
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(APP_DIR, os.pardir))
+MIARTE_DIR = os.path.join(ROOT_DIR, "miarte")
 sys.path.insert(0, APP_DIR)
+
+
+def ensure_miarte_metadata():
+    os.makedirs(MIARTE_DIR, exist_ok=True)
+    for name in sorted(os.listdir(MIARTE_DIR)):
+        folder_path = os.path.join(MIARTE_DIR, name)
+        if not os.path.isdir(folder_path):
+            continue
+        data_path = os.path.join(folder_path, "data.json")
+        if not os.path.exists(data_path):
+            data = {"title": name, "description": "", "file": "", "series": []}
+            with open(data_path, "w", encoding="utf-8") as handle:
+                json.dump(data, handle, indent=2, ensure_ascii=False)
 
 def open_script(module_name):
     # para ejecutar scripts python desde el main, deben tener run()
@@ -21,9 +36,10 @@ def open_script(module_name):
 
 def run():
     os.chdir(ROOT_DIR)
+    ensure_miarte_metadata()
     root = tk.Tk()
     root.title("MiArte Omi")
-    root.geometry("480x330")
+    root.geometry("480x430")
     root.resizable(True, True)
 
     frame = ttk.Frame(root, padding=16)
@@ -53,8 +69,11 @@ def run():
     editar_button = ttk.Button(button_frame, text="Editar", width=16, command=lambda: open_script("arte_edita"))
     editar_button.grid(row=1, column=0, padx=8, pady=4)
 
+    carpeta_button = ttk.Button(button_frame, text="Grupos", width=16, command=lambda: open_script("grupo_edita"))
+    carpeta_button.grid(row=2, column=0, padx=8, pady=4)
+
     generar_button = ttk.Button(button_frame, text="Generar", width=16, command=lambda: open_script("genera_html"))
-    generar_button.grid(row=2, column=0, padx=8, pady=4)
+    generar_button.grid(row=3, column=0, padx=8, pady=4)
 
     about_label = ttk.Label(
         frame,

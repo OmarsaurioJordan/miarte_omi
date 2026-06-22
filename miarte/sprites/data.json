@@ -1,22 +1,6 @@
 {
-  "title": "Sketchs",
-  "description": "Colección de sketches y pruebas gráficas.",
-  "file": "WhatsApp Image 2025-07-27 at 11.45.37 AM.jpeg",
-  "series": [
-    {
-      "id": "yooooo_13a05e31bb4549e2a8d15a00ea953b44",
-      "title": "yooooo",
-      "description": "soy yoooooooooooooooooo",
-      "year": 2016,
-      "tags": [
-        "yo",
-        "soy"
-      ],
-      "nsfw": true,
-      "files": [
-        "WhatsApp Image 2026-06-20 at 5.53.58 PM.jpeg"
-      ],
-      "style": "sprite"
-    }
-  ]
+  "title": "sprites",
+  "description": "",
+  "file": "",
+  "series": []
 }

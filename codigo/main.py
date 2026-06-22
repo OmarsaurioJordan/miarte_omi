@@ -10,7 +10,6 @@ ROOT_DIR = os.path.abspath(os.path.join(APP_DIR, os.pardir))
 MIARTE_DIR = os.path.join(ROOT_DIR, "miarte")
 sys.path.insert(0, APP_DIR)
 
-
 def ensure_miarte_metadata():
     os.makedirs(MIARTE_DIR, exist_ok=True)
     for name in sorted(os.listdir(MIARTE_DIR)):
